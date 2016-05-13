@@ -1,0 +1,178 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>task 40</title>
+    <link href="//netdna.bootstrapcdn.com/font-awesome/4.5.0/css/font-awesome.min.css" rel="stylesheet">
+    <style type="text/css">
+        #all{
+            width:100% ;
+            height: 600px ;
+
+
+        }
+
+        #show{
+            background-color: red;
+            width:100% ;
+            color: white;
+        }
+        #table{
+            padding: 13px ;
+        }
+        #tableNum{
+
+        }
+        #span{
+
+            margin: 0 10px ;
+        }
+        .past{
+            color: lightgray;
+        }
+        .now{
+            background-color: red;
+            color: white;
+        }
+        .active{
+            background-color: firebrick;
+        }
+        #dataArea{
+            border: 1px solid lightgray;
+            width: 170px  ;
+            display:none;
+        }
+        #table{}
+    </style>
+</head>
+<body>
+        <div id="background">
+            <input type="text" id="input">
+            <div id="all">
+                <div id="dataArea">
+                    <div id="show">
+                        <i class="fa fa-angle-double-left fa-lg" onclick="decrease(fullYear)"></i><i class="fa fa-angle-left fa-lg" onclick="decrease(month)"></i><span id="span"></span><i class="fa fa-angle-right fa-lg" onclick="increase(month)"></i><i class="fa fa-angle-double-right fa-lg" onclick="increase(fullYear)"></i>
+                    </div>
+                    <div id="table"></div>
+                </div>
+            </div>
+        </div>
+
+
+
+    <script type="text/javascript">
+        var input=document.getElementById("input");
+        var tableId=document.getElementById("table");
+        var dataArea=document.getElementById("dataArea");
+        var date=new  Date();//获取当前日期
+        var fullYear=date.getFullYear();//获取年份
+        var nowYear=fullYear;
+        var month=date.getMonth();//获取月份
+        var nowMonth=month;
+        var date_of_month=date.getDate();//获取日期
+        var first_date=new Date(fullYear,month,1);//获取当月第一天的
+        var week=first_date.getDay();//获取星期几
+        var days_of_month=new Array(31,28+is_leap(fullYear),31,30,31,30,31,31,30,31,30,31);
+        var rows=Math.ceil((days_of_month[month]+week)/7);
+        function renderTable(){//渲染日历界面
+            var span=document.getElementById("span");
+            var table='<table id="tableNum"  border="1"  cellspacing="0" bordercolor="lightgrey">';
+            first_date=new Date(fullYear,month,1);//获取当月第一天的
+            week=first_date.getDay();//获取星期几
+            rows=Math.ceil((days_of_month[month]+week)/7);
+            table+="<tr>";
+            table+="<th align='center'>日</th>";
+            table+="<th align='center'>一</th>";
+            table+="<th align='center'>二</th>";
+            table+="<th align='center'>三</th>";
+            table+="<th align='center'>四</th>";
+            table+="<th align='center'>五</th>";
+            table+="<th align='center'>六</th>";
+            table+="</tr>";
+            //打印表格第一行（有星期标志）
+            for (var i = 0; i < rows; i++) { //表格的行
+                table += "<tr >";
+                for (var k = 0; k < 7; k++) { //表格每行的单元格
+                    var idx = i * 7 + k; //单元格自然序列号
+                    var date_str = idx - week + 1; //计算日期
+                    //过滤无效日期（小于等于零的、大于月总天数的）
+                    (date_str <= 0 || date_str > days_of_month[month]) ? date_str = "&nbsp;" : date_str = idx - week + 1;
+
+                    //打印日期：今天底色为红
+                    if(fullYear<nowYear){
+                        table += "<td align='center' class='past' onmouseover='change(this)' onmouseout='chance(this)' onclick='fuckingclick(this)'>" + date_str + "</td>";
+                    } else if(fullYear==nowYear&&month<nowMonth) {
+                        table += "<td align='center' class='past' onmouseover='change(this)' onmouseout='chance(this)' onclick='fuckingclick(this)'>" + date_str + "</td>";
+                    }else if(fullYear==nowYear&&month==nowMonth&&date_str<date_of_month) {
+                        table += "<td align='center' class='past' onmouseover='change(this)' onmouseout='chance(this)' onclick='fuckingclick(this)'>" + date_str + "</td>";
+                    }else if (fullYear==nowYear&&month==nowMonth&&date_str == date_of_month) {
+                        table += "<td align='center' class='now' onmouseover='change(this)' onmouseout='chance(this)' onclick='fuckingclick(this)'>" + date_str + "</td>"
+                    } else {
+                        table += "<td align='center'  onmouseover='change(this)' onmouseout='chance(this)' onclick='fuckingclick(this)'>" + date_str + "</td>";
+                    }
+                }
+                table += "</tr>"; //表格的行结束
+            }
+            table += "</table>"; //表格结束
+            tableId.innerHTML=table;
+            span.innerHTML=fullYear+"年"+(month+1)+"月"+date_of_month+"日";
+
+        }
+        function is_leap(year){//判断是否闰年
+            if((year%4==0 && year%100!=0)||(year%400==0)){
+                return 1;
+            }
+            return 0;
+        }
+        function decrease(obj){
+            if (obj==fullYear){
+                fullYear--;
+            }else if(obj==month){
+                if(month==0){
+                    fullYear--;
+                    month=11;
+                }else {
+                    month--;
+                }
+            }
+            renderTable();
+            console.log(fullYear)
+
+        }
+        function increase(obj){
+            if (obj==fullYear){
+                fullYear++;
+            }else if(obj==month){
+                if(month==11){
+                    fullYear++;
+                    month=0;
+                }else {
+                    month++;
+                }
+            }
+            renderTable();
+        }
+        input.onfocus=function(){
+             dataArea.style.display="block";
+             dataArea.onclick=function(e){
+                 e.stopPropagation();
+            }
+        };
+        document.getElementById("all").onclick=function(){
+            dataArea.style.display="none";
+        };
+        function change(target){
+            target.className="active";
+        }
+        function  chance(target){
+            target.className-="active";
+            renderTable();
+        }
+        function fuckingclick(target){
+            dataArea.style.display="none";
+            input.value=fullYear+"年"+(month+1)+"月"+target.innerHTML+"日";
+        }
+        renderTable();
+    </script>
+</body>
+</html>
