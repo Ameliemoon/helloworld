@@ -1,0 +1,243 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>task 20</title>
+    <style type="text/css">
+        * {
+            margin: 0;
+            padding: 0;
+            font-family: "微软雅黑";
+            font-size: 1.05rem;
+        }
+
+        #control {
+            width: 900px;
+            margin: 0px auto 30px;
+            text-align: center;
+        }
+
+        button {
+            width: 80px;
+            height: 30px;
+            border: none;
+            margin: 0 4px;
+            background-color: #68ABC2;
+            color: white;
+            -webkit-transition: all 0.5s ease;
+            -moz-transition: all 0.5s ease;
+            -o-transition: all 0.5s ease;
+            -ms-transition: all 0.5s ease;
+            transition: all 0.5s ease;
+            outline: none;
+        }
+
+        button:hover {
+            box-shadow: 1px 1px 6px #555;
+        }
+
+        button:active {
+            background-color: deepskyblue;
+        }
+
+        #leftin,
+        #rightin {
+            background-color: coral;
+        }
+
+        #leftin:active,
+        #rightin:active {
+            background-color: lightcoral;
+        }
+
+        #searchbtn {
+            background-color: limegreen;
+        }
+
+        #searchbtn:active {
+            background-color: greenyellow;
+        }
+
+        #text {
+            padding: 10px;
+            display: block;
+            margin: 0px auto 20px;
+            resize: none;
+        }
+
+        #queue {
+            border: 1px solid cadetblue;
+            width: 900px;
+            height: 300px;
+            margin: 0 auto 50px;
+            overflow: hidden;
+            display: flex;
+            flex-flow: row nowrap;
+            justify-content: center;
+            align-content: center;
+            align-items: center;
+            padding: 20px;
+        }
+
+        .queueItem {
+            width: 60px;
+            text-align: center;
+            height: 200px;
+            font-size: 1rem;
+            font-weight: bold;
+            border-radius: 10px;
+        }
+
+        .searchresult {
+            height: 300px;
+            transition: height 1s ease-in-out;
+            box-shadow: 3px 3px 5px #333;
+        }
+    </style>
+</head>
+<body>
+    <div id="control">
+        <textarea name="text" id="text" cols="50" rows="2" placeholder="每个方块内容可以为中英文或者数字，用回车、逗号、顿号、空格等符号隔开"></textarea>
+        <button id="leftin">左侧入</button>
+        <button id="rightin">右侧入</button>
+        <button id="leftout">左侧出</button>
+        <button id="rightout">右侧出</button>
+        <input type="search" id="search" value=""/>
+        <button id="searchbtn">搜索</button>
+    </div>
+    <div id="queue"></div>
+    <script>
+        var arr=[];
+        var input=document.getElementById("text"),
+                queue=document.getElementById("queue"),
+                leftinbtn=document.getElementById("leftin"),
+                rightinbtn=document.getElementById("rightin"),
+                leftoutbtn=document.getElementById("leftout"),
+                rightoutbtn=document.getElementById("rightout"),
+                search=document.getElementById("search"),
+                searchbtn=document.getElementById("searchbtn");
+        leftinbtn.onclick = function() {
+            if (arr.length > 60) {
+                alert("快挤死了，要加塞儿的滚出去！");
+            } else if (input.value == "") {
+                alert("写点东西吧，要不我也变不成方块");
+            } else {
+                var newArr = handleInput(input.value);
+                for (var i = newArr.length - 1; i >= 0; i--) {
+                    arr.unshift(newArr[i]);
+                }
+                renderQueue();
+                input.value = "";
+            }
+        }
+        //右侧入的按钮点击事件
+        rightinbtn.onclick = function() {
+            if (arr.length > 60) {
+                alert("快挤死了，要加塞儿的滚出去！")
+            } else if (input.value == "") {
+                alert("写点东西吧，要不我也变不成方块");
+            } else {
+                var newArr = handleInput(input.value);
+                for (var i = 0; i < newArr.length; i++) {
+                    arr.push(newArr[i]);
+                }
+                renderQueue();
+                input.value = "";
+            }
+        }
+        //左侧出的按钮点击事件
+        leftoutbtn.onclick = function() {
+            if (input.value != "") {
+                alert("你如果认识字的话就不应该点错！")
+            } else {
+                if (arr.length != 0) {
+                    var val = arr.shift();
+                    renderQueue();
+                    alert('"' + val + "'的方块从← ← ← ← ← ← ←边滚出去啦~~~");
+                } else {
+                    alert("都没有方块了，你打算自己滚出去吗？")
+                }
+            }
+        }
+        //右侧出的按钮点击事件
+        rightoutbtn.onclick = function() {
+            if (input.value != "") {
+                alert("你如果认识字的话就不应该点错！")
+            } else {
+                if (arr.length != 0) {
+                    var val = arr.pop();
+                    renderQueue();
+                    alert('"' + val + "'的方块从→ → → → → → 边滚出去啦~~~");
+                } else {
+                    alert("都没有方块了，你打算自己滚出去吗？")
+                }
+            }
+        }
+        //查询按钮的点击事件
+        searchbtn.onclick = function() {
+            if (arr.length == 0 || search.value == "") {
+                alert("什么都没有还要搜什么！！！")
+            } else {
+                var count = 0;
+                for (var i = 0; i < arr.length; i++) {
+                    var keyword = new RegExp(search.value);
+                    if (keyword.test(arr[i])) {
+                        addClass(queue.childNodes[i], 'searchresult')
+                        count++;
+                    }
+                }
+                if (count = 0) {
+                    alert("搜了半天都没搜到！")
+                }
+                search.value = "";
+            }
+        }
+        function hasClass(obj, cls) {
+            return obj.className.match(new RegExp('(\\s|^)' + cls + '(\\s|$)'));
+        }
+
+        function addClass(obj, cls) {
+            if (!this.hasClass(obj, cls)) obj.className += " " + cls;
+        }
+        setInterval(function() {
+            var btn = document.getElementsByClassName('queueItem');
+            for (var i = 0; i < btn.length; i++) {
+                btn[i].index = i;
+                btn[i].onclick = function() {
+                    if (this.index == 0) {
+                        arr.shift();
+                    } else {
+                        arr.splice(this.index, 1);
+                    }
+                    renderQueue();
+                }
+            }
+        }, 50);
+
+        function handleInput(str){;
+            return str.replace(/[^0-9a-zA-Z\u40ee-\u9fa5]/g," ").split(" ")
+        }
+        function setClear(node){
+            while (node.hasChildNodes()){
+                node.removeChild(node.firstChild);
+            }
+        }
+        function renderQueue(){
+            setClear(queue);
+            for(var i = 0; i < arr.length; i++) {
+                var newElement = document.createElement("button");
+                newElement.className = 'queueItem';
+                var r = Math.floor(Math.random() * 255);
+                var b = Math.floor(Math.random() * 255);
+                var g = Math.floor(Math.random() * 255);
+                newElement.setAttribute("style", 'background-color:rgb(' + r + ',' + b + ',' + g + ');');
+                newElement.innerHTML = arr[i];
+                queue.appendChild(newElement);
+            }
+        }
+
+
+
+    </script>
+</body>
+</html>

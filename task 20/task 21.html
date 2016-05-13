@@ -1,0 +1,90 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>task 21</title>
+    <style type="text/css">
+        #interest{
+            margin-top: 200px ;
+        }
+        .queueItem {
+            width: 60px;
+            text-align: center;
+            height: 200px;
+            font-size: 1rem;
+            font-weight: bold;
+            border-radius: 10px;
+        }
+
+    </style>
+</head>
+<body>
+    <label>Tag:</label><input type="text" id="tag" onkeypress="EnterPress(event)" onkeydown="EnterPress()" >
+    <div id="input"></div>
+    <script type="text/javascript">
+        var arr=[],arr2=[],
+                tag=document.getElementById("tag"),
+                input=document.getElementById("input");
+        function EnterPress(e){
+            var e=e||window.event;
+            if(e.keyCode==13){
+                for(var i=0;i<arr.length;i++){
+                    if(arr[i]==tag.value){
+                        alert("不能输入相同内容");
+                        return false;
+                    }
+                }
+                if (tag.value==""){
+                    return false;
+                }
+                else {
+                    if(arr.length<=10){
+                        arr.unshift(tag.value.trim());
+                        renderQueue();
+                        tag.value="";
+                    }
+                    else {
+                        arr.pop();
+                        renderQueue();
+                        tag.value="";
+                    }
+                }
+            }
+        }
+
+        function setClear(node){
+            while (node.hasChildNodes()){
+                node.removeChild(node.firstChild);
+            }
+        }
+        function renderQueue(){
+            setClear(input);
+            for(var i = 0; i < arr.length; i++) {
+                var newElement = document.createElement("button");
+                newElement.className = 'queueItem';
+                var r = Math.floor(Math.random() * 255);
+                var b = Math.floor(Math.random() * 255);
+                var g = Math.floor(Math.random() * 255);
+                newElement.setAttribute("style", 'background-color:rgb(' + r + ',' + b + ',' + g + ');');
+                newElement.innerHTML = arr[i];
+                input.appendChild(newElement);
+            }
+        }
+        setInterval(function() {
+            var btn = document.getElementsByClassName('queueItem');
+            for (var i = 0; i < btn.length; i++) {
+                btn[i].index = i;
+                btn[i].onclick = function() {
+                    if (this.index == 0) {
+                        arr.shift();
+                    } else {
+                        arr.splice(this.index, 1);
+                    }
+                    renderQueue();
+                }
+            }
+        }, 50);
+
+    </script>
+</body>
+</html>
