@@ -1,0 +1,120 @@
+<!DOCTYPE html>
+<html >
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8"/>
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <title>mission18 and 19</title>
+</head>
+<style>
+    #pf li{
+        float:left;
+        list-style: none;
+        color: white;
+        background: firebrick;
+        padding: 6px;
+        margin: 2px;
+        font-family: Arial;
+        cursor: pointer;
+    }
+    .main div ul {
+        display: flex;
+        align-items: flex-end;
+    }
+</style>
+<body>
+<div class="main">
+    <input type="text" id="input"/>
+    <button>左侧入</button>
+    <button>右侧入</button>
+    <button>左侧出</button>
+    <button>右侧出</button>
+    <button>排序</button>
+    <div>
+        <ul id="pf">
+        </ul>
+    </div>
+</div>
+<script>
+    (function(){
+        var print = document.getElementById('pf'),
+                btn = document.getElementsByTagName('button'),
+                txt='',
+                array=[];
+        /*事件监听*/
+        for(var i =0;i<2;i++){
+            btn[i].index = i;
+            btn[i].addEventListener('click', function () {
+                txt = document.getElementById('input').value;
+                isLimit()?(isNum()?actions(this.index):alert('请输入10到100的数字')):alert("添加数量不能超过60个");
+            })
+        }
+        for(var i =2;i<4;i++){
+            btn[i].index = i;
+            btn[i].addEventListener('click', function () {
+                actions(this.index);
+            })
+        }
+        btn[4].addEventListener("click",function() {
+            var pointer=0;
+            var charlen=array.length;
+            var sort=function(){
+                if (parseInt(array[pointer]) > parseInt(array[pointer+1])) {
+                    var k = array[pointer];
+                    array[pointer] = array[pointer+1];
+                    array[pointer+1] = k;
+                }
+                pointer++;
+                if(pointer>=charlen){
+                    charlen--;
+                    pointer=0;
+                }
+                if(charlen>0) {
+                    setInterval(sort, 1000);
+                }
+                pf()
+
+            }
+            setInterval(sort,1000);
+            console.log(array)
+        })
+        /*节点方法*/
+        function actions(i){
+            switch (i){
+                case 0: array.unshift(txt);break;
+                case 1: array.push(txt);break;
+                case 2: array.shift();break;
+                case 3: array.pop();break;
+
+            }
+            pf(array);
+        }
+        /*验证*/
+        function isLimit(){
+            if(array.length<=59){
+                return true;
+            }
+        }
+        function isNum(){
+
+            return txt.match(/^(?:[1-9]\d|100)$/)?1:0;
+
+        }
+        /*输出*/
+        function pf(){
+            var htmls ='';
+            for(var i=0;i<array.length;i++){
+                htmls = htmls+ "<li class='"+i+"' style='height:"+array[i]+"px'>"+array[i]+"</li>"
+            }
+            print.innerHTML = htmls;
+        }
+        /*点击删除*/
+        print.addEventListener('click', function (e) {
+            var event = window.event || e,
+                    li = event.target;
+            array.splice(li.className,1);
+            pf();
+        })
+    })()
+</script>
+</body>
+</html>
