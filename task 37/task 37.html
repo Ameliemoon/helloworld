@@ -1,0 +1,128 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>task 37</title>
+    <style type="text/css">
+        body{
+            margin: 0;
+            padding: 0;
+        }
+        #background{
+            text-align: center;
+            position: relative;
+        }
+        button{
+           display: block;
+            margin: 0 auto;
+        }
+        #float{
+            width: 800px ;
+            height: 300px ;
+            font-family: 黑体;
+            font-size: 20px ;
+            border: 1px solid lightgray;
+            position: absolute;
+            top:100px ;
+            left:20% ;
+            z-index: 101;
+            display: none;
+        }
+        #header{
+            width: 100%;
+            height: 15%;
+            background-color: dimgray;
+            border: 1px solid black;
+            color: white;
+            line-height: 10px ;
+        }
+        #header p{
+            display: inline-block;
+            margin-left: 20px ;
+        }
+        #foot{
+            width: 100%;
+            height: 100%;
+            background-color: white;
+        }
+        #foot span{
+            display: inline-block;
+            margin-top: 40px ;
+            margin-left: 20px ;
+        }
+        #button{
+            float: right;
+            margin-top: 150px ;
+        }
+        #button button{
+            width: 200px ;
+            height: 50px ;
+            font-family: 黑体;
+            font-size: 20px ;
+            color: white;
+            background-color: dimgray;
+            float: left;
+            margin: 10px ;
+        }
+        #color{
+            background-color: black;
+            opacity: 0.3;
+            width: 1345px ;
+            height: 700px ;
+            position: absolute;
+            top: 0;
+            z-index: 100;
+            display: none;
+        }
+    </style>
+</head>
+<body>
+    <div id="background">
+        <button id="btn1">显示浮出层</button>
+        <img src="1.jpeg">
+    </div>
+    <div id="color"></div>
+    <div id="float">
+        <div id="header"><p>这是一个浮出层</p></div>
+        <div id="foot">
+            <span>这是一个浮出层</span>
+            <div id="button">
+                <button type="submit" id="btn2">确定</button>
+                <button type="submit" id="btn3">取消</button>
+            </div>
+        </div>
+    </div>
+    <script type="text/javascript">
+        var btn1=document.getElementById("btn1");
+        var btn2=document.getElementById("btn2");
+        var btn3=document.getElementById("btn3");
+        var color=document.getElementById("color");
+        btn1.onclick=function() {
+            document.getElementById("color").style.display = "block";
+            document.getElementById("float").style.display = "block";
+            loc=document.getElementsByTagName("body");
+            var st;
+            var scroll=function(e){
+                clearTimeout(st);
+                st=setTimeout(function(){
+                    window.scrollTo(loc.scrollLeft,loc.scrollTop);
+                },10);
+            };
+            window.onscroll=scroll;//禁止滚动条滚动，但是还不能做到很好
+        };
+        btn2.onclick=function(){
+            document.getElementById("color").style.display="none";
+            document.getElementById("float").style.display="none";
+
+        };
+        btn3.onclick=function(){
+            document.getElementById("color").style.display="none";
+            document.getElementById("float").style.display="none";
+        };
+        color.onclick=function(){
+            document.getElementById("color").style.display="none";
+            document.getElementById("float").style.display="none";
+        }
+    </script>
+</body>
+</html>
