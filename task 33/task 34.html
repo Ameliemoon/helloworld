@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>task 34</title>
+    <style type="text/css">
+        * {
+            padding: 0;
+            margin: 0;
+            font-family: "Microsoft YaHei UI", sans-serif;
+        }
+        #container {
+            border: 2px solid #000;
+            position: relative;
+            margin: 0 auto;
+        }
+        .clearfix {
+            zoom: 1;
+        }
+        .clearfix:after {
+            content: "";
+            display: block;
+            clear: both;
+        }
+        .maze-block {
+            width: 42px;
+            height: 42px;
+            border-bottom: 1px solid #aaa;
+            border-right: 1px solid #aaa;
+            float: left;
+        }
+        .bottom-maze-block {
+            border-bottom: none;
+        }
+        .right-maze-block {
+            border-right: none;
+        }
+
+        .Action {
+            width: 42px;
+            height: 34px;
+            background: red;
+            border-top: 8px solid blue;
+            -webkit-transition: all 1s ease;
+            -moz-transition: all 1s ease;
+            -o-transition: all 1s ease;
+            transition: all 1s ease;
+        }
+        .input {
+            text-align: center;
+            margin-top: 20px ;
+        }
+    </style>
+
+</head>
+<body>
+    <section id="container" class="clearfix"></section>
+    <section class="input"><input type="text" id="command"><button  id="start">执行</button></section>
+    <script type="text/javascript" src="task%2034.js"></script>
+</body>
+</html>
