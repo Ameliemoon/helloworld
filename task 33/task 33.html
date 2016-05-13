@@ -1,0 +1,68 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>task 33</title>
+    <style type="text/css">
+        table{
+            border-collapse: collapse;
+            margin: 0 auto;
+        }
+        .background td{
+            width: 50px ;
+            height: 50px ;
+            font-size: 20px ;
+            font-weight: bold;
+            text-align: center;
+        }
+        .background tr:nth-child(n+2) td:nth-child(n+2){
+            border: 1px solid #aaaaaa;
+        }
+        .background tr:first-child td:nth-child(n+2),.background tr:last-child td:nth-child(n+2){
+            border-bottom: 2px solid black;
+        }
+        .background tr:nth-child(n+2) td:first-child,.background tr:nth-child(n+2) td:last-child{
+            border-right: 2px solid black;
+        }
+        #input{
+            margin-left: 435px;
+            margin-top: 10px;
+        }
+        .Left, .Top, .Bottom, .Right {
+            position: relative;
+            background-color: red;
+        }
+        .Left div, .Right div, .Top div, .Bottom div {
+            background-color: blue;
+            position: absolute;
+        }
+        .Left div, .Right div{
+            width: 10px;
+            height: 100%;
+            top: 0;
+        }
+        .Top div, .Bottom div {
+            width: 100%;
+            height: 10px;
+        }
+        .Top div {
+            top: 0;
+        }
+        .Right div {
+            right: 0;
+        }
+        .Bottom div {
+            bottom: 0;
+        }
+        .Left div {
+            left: 0;
+        }
+    </style>
+
+</head>
+<body>
+    <table id="background" class="background"></table>
+    <input type="text" id="input"><button >执行</button>
+    <script type="text/javascript" src="task%2033.js"></script>
+</body>
+</html>
