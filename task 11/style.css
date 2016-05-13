@@ -1,0 +1,213 @@
+@charset "UTF-8";
+html{
+    font-size: 62.5% ;
+}
+body{
+    width:100%;
+    margin: 0;
+}
+header{
+    background-color: aqua;
+    color: white;
+    line-height: 6rem;
+    font-family: 微软雅黑;
+    margin: 0;
+}
+header a{
+    text-decoration: none;
+    color: white;
+    float: left;
+    font-size: 3rem;
+    display: flex;
+    align-items: center;
+    margin-left:2%;
+}
+header h1 {
+    margin: 0;
+    text-align: center;
+    font-size: 3rem;
+}
+.box1 img{
+    width: 100%;
+    height: 100%;
+    margin-top: -1.0rem;
+
+}
+.tip1 ul li {
+    list-style: none;
+    float: left;
+    font-size: 3rem;
+}
+.nav li a{
+    text-decoration: none;
+    color: black;
+}
+.nav {
+    display: flex;
+    align-items: center;
+    text-align: center;
+}
+.nav li {
+    flex: 1;
+}
+.nav li a{
+    display: block;
+    box-sizing: border-box;
+    white-space: nowrap;
+    overflow: hidden;
+    margin: 0 auto;
+    padding: 1rem 0;
+}
+.nav li a:hover{
+    border-bottom: 0.5rem solid #8fd6da;
+    color:#8fd6da;
+}
+.tip2 ul{
+    display: flex;
+    align-items: center;
+    text-align: center;
+}
+
+.tip2 ul li{
+    list-style: none;
+    flex: 1;
+    font-size: 3rem;
+}
+.tip2 ul li i {
+    color: blue;
+}
+.tip2 {
+    width: 100%;
+    display: block;
+    border-bottom: 0.5rem solid dimgray;
+}
+.box2{
+    margin: 2rem 0;
+}
+.box2-1,.box2-2,.box2-3{
+    width: 32%;
+    height: 100%;
+    float: left;
+    flex: 1;
+    text-align: center;
+}
+.box2-1 img,.box2-2 img,.box2-3 img{
+    width: 50%;
+    height:60%;
+}
+.box2-1,.box2-2{
+    border-right: 0.5rem solid dimgray;
+}
+.box3{
+    width: 100%;
+    height:100%;
+    margin-top: 33%;
+    background-color: lightgray;
+}
+.box3-1{
+    margin-top: 2rem;
+    background-color: white;
+    border-bottom: 0.3rem solid dimgray;
+    font-size: 2rem;
+}
+.box3-2 table{
+    border-collapse: collapse;
+}
+.box3-2 table td {
+    width: 33%;
+    height: 100%;
+    border: 1.5rem solid white;
+    text-align: center;
+    font-size: 2rem;
+    background-color: lightgray;
+}
+.box3-2 table td img{
+    width: 100%;
+    height: 100%;
+}
+.box3-3{
+    margin-top: 2rem;
+    background-color: white;
+    border-bottom: 0.3rem solid dimgray;
+    font-size: 2rem;
+}
+.box3-4 table{
+    border-collapse: collapse;
+}
+.box3-4 table td {
+    width: 33%;
+    height: 100%;
+    border: 1.5rem solid white;
+    text-align: center;
+    font-size: 2rem;
+    background-color: lightgray;
+}
+.box3-4 table td img{
+    width: 100%;
+    height: 100%;
+}
+.box3-5{
+    margin-top: 2%;
+    width: 100%;
+    height: 100%;
+    background-color: white;
+    padding: 2%;
+}
+.box3-5 img{
+    width: 30%;
+    height: 50%;
+    float: left;
+    margin-right: 5rem;
+}
+.box3-5 p{
+    font-size: 3rem;
+    display: block;
+}
+.box3-5 span{
+    font-size: 2rem;
+    color: lightgray;
+    display: block;
+    margin-top: 25%;
+}
+.box3-6{
+    margin-top: 2%;
+    width: 100%;
+    height: 100%;
+    background-color: white;
+    padding: 2%;
+}
+.box3-6 img{
+    width: 30%;
+    height: 50%;
+    float: left;
+    margin-right: 5rem;
+}
+.box3-6 p{
+    font-size: 3rem;
+    display: block;
+}
+.box3-6 span{
+    font-size: 2rem;
+    color: lightgray;
+    display: block;
+    margin-top: 25%;
+}
+.box3-7{
+    margin-top: 2rem;
+    background-color: white;
+    width: 100%;
+    height: 100%;
+    padding: 3%;
+}
+.box3-7 p{
+    font-size: 3rem;
+}
+.box3-7 img{
+    width: 25%;
+    height: 50%;
+    margin: 2rem;
+}
+.box3-7 span{
+    font-size: 2rem;
+    color: lightgray;
+}
