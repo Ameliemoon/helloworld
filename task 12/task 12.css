@@ -1,0 +1,55 @@
+.biaoge th {
+    background-color: black;
+    color: white;
+    text-align: left;
+}
+.red{
+    color: red;
+}
+.dif{
+    background-color: darkgrey;
+}
+.text2{
+    margin:20px 0 0 30px  ;
+    width:100px ;
+    transition: width 0.5s;
+}
+.text2:focus{
+    width: 200px ;
+    border: 2px solid deepskyblue;
+}
+img{
+    width:0;
+    height: 100%;
+    transition: 0.5s;
+    display: inline-block;
+    float: left;
+
+}
+.c{
+    display: inline-block;
+    background-color: #938e8c;
+    width: 30px;
+    height: 30px;
+    position: relative;
+    top: -30px;
+    text-align: center;
+    line-height: 30px;
+    text-decoration: none;
+    opacity: 0.5;
+    font-family: 黑体;
+    color: #ffffff;
+
+}
+
+.container{
+    width: 500px;
+    height: 300px;
+    margin: 50px;
+    background-color: #938e8c;
+
+}
+:target{
+    width: 100%;
+    height: 100%;
+}
