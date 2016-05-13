@@ -1,0 +1,121 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <style type="text/css">
+        body{
+            margin: 0;
+            padding: 0;
+        }
+        #background{
+            height: 2000px ;
+            position: relative;
+        }
+        #header{
+            position: fixed;
+            top:0 ;
+            left: 166px ;
+            z-index: 101;
+        }
+        table{
+            margin: 0 auto;
+            border-collapse: collapse;
+        }
+        th{
+            width: 200px ;
+            height: 50px ;
+            background-color: black;
+            color: white;
+        }
+        td{
+            font-size: 20px ;
+            font-family: 黑体;
+            text-align: center;
+            width: 200px ;
+            height: 50px ;
+        }
+        table,th,td{
+            border: 1px solid lightgray;
+        }
+    </style>
+</head>
+<body>
+    <div id="background">
+        <table id="table"></table>
+        <div id="header">
+            <table id="table2"></table>
+        </div>
+    </div>
+    <script type="text/javascript">
+        var grade=[
+            ["小明",80,90,70,240],
+            ["小红",90,60,90,240],
+            ["小亮",60,100,70,230],
+            ["小文",70,60,80,210],
+            ["小张",85,65,80,220],
+            ["小张",85,65,80,220],
+            ["小张",85,65,80,220],
+            ["小张",85,65,80,220],
+            ["小张",85,65,80,220],
+            ["小张",85,65,80,220],
+            ["小张",85,65,80,220],
+            ["小张",85,65,80,220],
+            ["小张",85,65,80,220],
+            ["小张",85,65,80,220],
+            ["小张",85,65,80,220],
+            ["小张",85,65,80,220],
+            ["小张",85,65,80,220],
+            ["小张",85,65,80,220],
+            ["小张",85,65,80,220],
+            ["小张",85,65,80,220],
+            ["小张",85,65,80,220],
+            ["小张",85,65,80,220],
+            ["小张",85,65,80,220],
+            ["小张",85,65,80,220]
+        ];
+        var table=document.getElementById("table");
+        var table2=document.getElementById("table2");
+        function renderTable(grade){
+            table.innerHTML="";
+            table2.innerHTML="";
+            var newTh=document.createElement("tr");
+            var newTh2=document.createElement("tr");
+            newTh.innerHTML='<th>姓名</th>'+' <th>语文</th>'+' <th>数学</th>'+' <th>英语</th>'+'<th>总分</th>';
+            newTh2.innerHTML='<th>姓名</th>'+' <th>语文</th>'+' <th>数学</th>'+' <th>英语</th>'+'<th>总分</th>';
+            table.appendChild(newTh);
+            table2.appendChild(newTh2);
+            var str="";
+            for(var o=0;o<grade.length;o++){
+                var newTr=document.createElement("tr");
+                str+="<td>"+grade[o][0]+"</td>";
+                for(var i=0;i<4;i++){
+                    str+="<td>"+grade[o][i+1]+"</td>";
+                }
+                newTr.innerHTML=str;
+                table.appendChild(newTr);
+                str="";
+            }
+        }
+        function getScrollTop(){//获取当前滚动条的高度
+            var scrollTop=0;
+            if(document.documentElement&&document.documentElement.scrollTop){
+                scrollTop=document.documentElement.scrollTop;
+            }else if(document.body){
+                scrollTop=document.body.scrollTop;
+            }
+            return scrollTop;
+        }
+        window.onscroll=function(){//当页面出现滚动事件时 启动函数
+            var scrollTop=getScrollTop();
+            if(scrollTop>=1300){
+                table2.style.display="none";
+            }else {
+                table2.style.display="block";
+            }
+            renderTable(grade);
+            console.log(scrollTop);
+        }
+    </script>
+</body>
+</html>
