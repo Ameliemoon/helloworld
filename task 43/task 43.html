@@ -1,0 +1,117 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>task 43</title>
+    <style type="text/css">
+        body{
+            margin: 0;
+            padding: 0;
+        }
+       .ImgOne{
+           width: 900px ;
+           height: 300px ;
+       }
+       .ImgTwo{
+           width: 600px ;
+           height: 300px ;
+       }
+       .ImgThree{
+           width:300px;
+           height: 150px ;
+       }
+       .ImgFour{
+           width:450px ;
+           height: 150px ;
+       }
+       .ImgFive{
+           width: 600px ;
+           height: 200px ;
+       }
+        .Imgsix{
+            width: 300px ;
+            height: 100px ;
+        }
+        .clipOne {
+            -webkit-clip-path: polygon(0% 0%, 70% 0%, 30% 100%, 0% 100%);
+
+        }
+       .clipTwo{
+           -webkit-clip-path: polygon(70% 0%,100% 0%,100% 100%,30% 100%);
+       }
+        .boxThree{
+            margin: 50px  auto;
+            position: relative;
+
+        }
+        .ImgPositionOne{
+            position: absolute;
+            top: 0;
+            right: 0;
+        }
+        .ImgPositionTwo{
+            position: absolute;
+            top: 150px ;
+            right: 0;
+        }
+        .ImgPositionThree{
+            position: absolute;
+            top: 150px  ;
+            left: 0;
+        }
+        .ImgPositionFour{
+            position: absolute;
+            bottom: 0;
+            left: 0;
+        }
+        .ImgPositionFive{
+            position: absolute;
+            bottom: 0;
+            left: 300px ;
+        }
+        .ImgPositionSix{
+            position: absolute;
+            bottom: 0;
+            right: 0;
+        }
+        .ImgPositionSeven{
+            position: absolute;
+            top: 100px ;
+            right: 0;
+        }
+    </style>
+</head>
+<body>
+    <div  class="boxThree ImgOne"><img src="1.jpg" class="ImgOne "></div>
+    <div  class="boxThree ImgOne">
+        <img src="1.jpg" class="ImgOne clipOne boxImg ImgPositionFour" >
+        <img src="2.jpg" class="ImgOne clipTwo boxImg ImgPositionOne">
+    </div>
+    <div  class="boxThree ImgOne">
+        <img src="1.jpg" class="ImgTwo ">
+        <img src="2.jpg" class="ImgThree ImgPositionOne">
+        <img src="3.jpg" class="ImgThree ImgPositionTwo">
+    </div>
+    <div class=" boxThree ImgOne">
+        <img src="1.jpg" class="ImgFour">
+        <img src="2.jpg" class="ImgFour ImgPositionOne">
+        <img src="3.jpg" class="ImgFour ImgPositionThree">
+        <img src="4.jpg" class="ImgFour ImgPositionTwo">
+    </div>
+    <div class="ImgOne boxThree">
+        <img src="1.jpg" class="ImgFive">
+        <img src="2.jpg" class="ImgThree ImgPositionOne">
+        <img src="3.jpg" class="Imgsix ImgPositionFour" >
+        <img src="4.jpg" class="Imgsix ImgPositionFive">
+        <img src="5.jpg" class="ImgThree ImgPositionTwo">
+    </div>
+    <div class="boxThree ImgOne">
+        <img src="1.jpg" class="ImgFive">
+        <img src="2.jpg" class="Imgsix ImgPositionOne">
+        <img src="3.jpg" class="Imgsix ImgPositionFour" >
+        <img src="4.jpg" class="Imgsix ImgPositionFive">
+        <img src="5.jpg" class="Imgsix ImgPositionSeven">
+        <img src="6.jpg" class="Imgsix ImgPositionSix">
+    </div>
+</body>
+</html>
