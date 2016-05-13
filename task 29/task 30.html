@@ -1,0 +1,176 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>task 30</title>
+    <style type="text/css">
+        label{
+            font-family: 黑体;
+            margin-left: 100px ;
+        }
+        .check,#check{
+            position: relative;
+            left: -30px ;
+        }
+        p{
+            font-family: 宋体;
+            margin-left:150px ;
+        }
+        button{
+            margin-left: 350px ;
+        }
+
+
+    </style>
+</head>
+<body>
+    <label>名称:</label><input type="text" id="name">
+    <p>sadf</p>
+    <label>密码:</label><input type="text" id="password">
+    <p>asdf</p>
+    <label class="check">密码确认:</label><input type="text" id="check">
+    <p>asdf</p>
+    <label>邮箱:</label><input type="text" id="email">
+    <p>asdf</p>
+    <label>手机:</label><input type="text" id="phone">
+    <p>asdf</p>
+    <button type="submit" id="confirm">提交</button>
+    <script type="text/javascript">
+        var god=[0,0,0,0,0];
+        var input=document.getElementsByTagName("input");
+        var btn=document.getElementsByTagName("p");
+        input[0].onfocus=function(){
+            btn[0].innerHTML="必填，长度为4-16个字符";
+            btn[0].style.color="grey";
+            god[0]=0;
+        };
+        input[0].onblur=function(){
+            if(input[0].value==null||input[0].value==""){
+                input[0].style.border="1px solid red";
+                btn[0].innerHTML="名称不能为空！";
+                btn[0].style.color="red";
+                god[0]=0;
+            }
+            else if(input[0].value.length<4||input[0].value.length>16){
+                input[0].style.border="1px solid red";
+                btn[0].innerHTML="名称长度为4-16个字符！";
+                btn[0].style.color="red";
+                god[0]=0;
+            }else {
+                input[0].style.border="1px solid green";
+                btn[0].innerHTML="格式正确！";
+                btn[0].style.color="green";
+                god[0]=1;
+            }
+        };
+        input[1].onfocus=function(){
+            btn[1].innerHTML="密码长度为6-18";
+            btn[1].style.color="grey";
+            god[1]=0;
+        };
+        input[1].onblur=function(){
+            if(input[1].value==null||input[1].value==""){
+                input[1].style.border="1px solid red";
+                btn[1].innerHTML="密码不能为空！";
+                btn[1].style.color="red";
+                god[1]=0;
+            }
+            else if(input[1].value.length<6||input[1].value.length>19){
+                input[1].style.border="1px solid red";
+                btn[1].innerHTML="密码长度为6-19个字符！";
+                btn[1].style.color="red";
+                god[1]=0;
+            }else {
+                input[1].style.border="1px solid green";
+                btn[1].innerHTML="格式正确！";
+                btn[1].style.color="green";
+                god[1]=1;
+            }
+        };
+        input[2].onfocus=function(){
+            btn[2].innerHTML="再次输入密码";
+            btn[2].style.color="grey";
+            god[2]=0;
+        };
+        input[2].onblur=function(){
+            if(input[2].value==null||input[2].value==""){
+                input[2].style.border="1px solid red";
+                btn[2].innerHTML="密码不能为空！";
+                btn[2].style.color="red";
+                god[2]=0;
+            }
+            else if(input[2].value!=input[1].value){
+                input[2].style.border="1px solid red";
+                btn[2].innerHTML="两次输入密码不一致！";
+                btn[2].style.color="red";
+                god[2]=0;
+            }else {
+                input[2].style.border="1px solid green";
+                btn[2].innerHTML="密码正确！";
+                btn[2].style.color="green";
+                god[2]=1;
+            }
+        };
+        input[3].onfocus=function(){
+            btn[3].innerHTML="请输入邮箱";
+            btn[3].style.color="grey";
+            god[3]=0;
+        };
+        input[3].onblur=function(){
+            if(input[3].value==null||input[3].value==""){
+                input[3].style.border="1px solid red";
+                btn[3].innerHTML="邮箱不能为空！";
+                btn[3].style.color="red";
+                god[3]=0;
+            }
+            else if(input[3].value.replace(/\ /g,"").search(/^\w+((-\w+)|(\.\w+))*\@[A-Za-z0-9]+((\.|-)[A-Za-z0-9]+)*\.[A-Za-z0-9]+$/) == -1){
+                input[3].style.border="1px solid red";
+                btn[3].innerHTML="邮箱格式不正确！";
+                btn[3].style.color="red";
+                god[3]=0;
+            }else {
+                input[3].style.border="1px solid green";
+                btn[3].innerHTML="格式正确！";
+                btn[3].style.color="green";
+                god[3]=1;
+            }
+        };
+        input[4].onfocus=function(){
+            btn[4].innerHTML="请输入电话号码";
+            btn[4].style.color="grey";
+            god[4]=0;
+        };
+        input[4].onblur=function(){
+            if(input[4].value==null||input[4].value==""){
+                input[4].style.border="1px solid red";
+                btn[4].innerHTML="电话号码不能为空！";
+                btn[4].style.color="red";
+                god[4]=0;
+            }
+            else if(input[4].value.length!=11){
+                input[4].style.border="1px solid red";
+                btn[4].innerHTML="号码长度不对！";
+                btn[4].style.color="red";
+                god[4]=0;
+            }else {
+                input[4].style.border="1px solid green";
+                btn[4].innerHTML="格式正确！";
+                btn[4].style.color="green";
+                god[4]=1;
+            }
+        };
+        var confirm=document.getElementById("confirm");
+        confirm.onclick=function(){
+            for(var i=0;i<god.length;i++){
+                if(god[i]==0){
+                    alert("输入有误！");
+                    return false;
+                }
+            }
+            alert("提交成功！");
+        }
+
+
+    </script>
+</body>
+</html>

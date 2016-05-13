@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>task 31</title>
+    <style type="text/css">
+    </style>
+</head>
+<body>
+    <form>
+        <input type="radio" name="student" checked="checked" onclick="onschool()">在校生
+        <input type="radio" name="student" onclick="noschool()">非在校生
+        <div id="inschool">
+            <label>学校</label>
+            <select id="city" onchange="setSecond(this)">
+                <option value="北京">北京</option>
+                <option value="南京">南京</option>
+            </select>
+            <select id="school"><option>北京大学</option><option>北京航空大学</option><option>北京体育大学</option><option>北京理工大学</option></select>
+        </div>
+        <div id="company">
+            <label>就业单位</label><input type="text">
+        </div>
+    </form>
+    <script type="text/javascript">
+        var inschool=document.getElementById("inschool");
+        var company=document.getElementById("company");
+        inschool.style.display="";
+        company.style.display="none";
+        function onschool(){
+            inschool.style.display="";
+            company.style.display="none";
+        }
+        function noschool(){
+            inschool.style.display="none";
+            company.style.display="";
+        }
+        function setSecond(obj){
+            var val = obj.value;
+            if(val == '北京'){
+                var sec = document.getElementById('school');
+                sec.innerHTML = "<option>北京大学</option><option>北京航空大学</option><option>北京体育大学</option><option>北京理工大学</option>";
+            }else{
+                var sec = document.getElementById('school');
+                sec.innerHTML = "<option>南京大学</option><option>南京航空大学</option><option>南京体育大学</option><option>南京理工大学</option>";
+            }
+        }
+
+
+    </script>
+</body>
+</html>

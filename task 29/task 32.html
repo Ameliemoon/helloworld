@@ -1,0 +1,217 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>task 32</title>
+    <style type="text/css">
+        select{
+            width: 60px;
+        }
+        form{
+            padding: 10px;
+        }
+        .s1{
+            font-family: "Microsoft YaHei";
+            height: 40px;
+            color:#FFF;
+            line-height: 40px;
+            width: 400px;
+            border-radius: 5px;
+            background-color: #c2c2c2;
+            font-size: 16px;
+        }
+        .s2{
+            font-family: "Microsoft YaHei";
+            height: 140px;
+            color:#FFF;
+            line-height: 40px;
+            width: 200px;
+            border-radius: 5px;
+            background-color: #1498ff;
+            font-size: 16px;
+            text-align: center;
+        }
+        .s1span{
+            height: 20px;
+            color: #FFF;
+            font-size: 14px;
+            float: right;
+            margin-right: 20px ;
+        }
+        .s2span{
+            height: 20px;
+            color: #FFF;
+            font-size: 14px;
+            display: block;
+        }
+    </style>
+</head>
+<body>
+    <input type="checkbox" id="name" name="select"><label for="name">姓名</label>
+    <input type="checkbox" id="pass" name="select"><label for="pass">密码</label>
+    <input type="checkbox" id="mail" name="select"><label for="mail">邮箱</label>
+    <input type="checkbox" id="phone" name="select"><label for="phone">手机</label>
+    <input type="radio" id="style1" name="style"><label for="style1">样式一</label>
+    <input type="radio" id="style2" name="style"><label for="style2">样式二</label>
+    <button onclick="createAll()">生成表单</button>
+    <form id="container"></form>
+    <script type="text/javascript">
+        //表单数据
+        var named={
+            id:"name1",
+            label:"姓名",
+            type:"input",
+            validator:function(){
+                var inputbox=document.getElementById(senddate.id);
+                var nvalue=document.getElementById(senddate.id).value.trim();
+                var tips=document.getElementById(senddate.id+"tip");
+                if(nvalue.match(/\s/)||""){
+                    tips.innerHTML="名字不能为空或包含空格";
+                    tips.style.color="red";
+                    inputbox.style.borderColor="red";
+                }
+                else if(nvalue.match(/[\u4e00-\u9fa5]/g)){
+                    if(nvalue.length<2||nvalue.length>8){
+                        tips.innerText="长度为4-16个字符";
+                        tips.style.color="red";
+                        inputbox.style.borderColor="red"
+                    }
+                    else {
+                        tips.innerText="格式正确";
+                        tips.style.color="#00ac20";
+                        inputbox.style.borderColor="#00ff00";
+                    }
+                }
+                else if(nvalue.length<4||nvalue.length>16){
+                    tips.innerText="长度为4-16个字符";
+                    tips.style.color="red";
+                    inputbox.style.borderColor="red"
+                }
+                else{
+                    tips.innerText="格式正确";
+                    tips.style.color="#00ac20";
+                    inputbox.style.borderColor="#00ac20";
+                }},
+            rules:"必填，长度为2-8个字符",
+            success:"格式正确",
+            fail:"姓名不能为空"
+        };
+        var pass={
+            id:"pass1",
+            label:"密码",
+            type:"input",
+            validator:function(){
+                var pw=document.getElementById(senddate.id).value;
+                var pwtip=document.getElementById(senddate.id+"tip");
+                if(pw.match(/\s/)||pw==""){
+                    pwtip.innerText="密码不能为空";
+                    pwtip.style.borderColor="red";
+                    pwtip.style.color="red";
+                }
+                else {
+                    pwtip.innerText="密码可用";
+                    pwtip.style.borderColor="#00ac20";
+                    pwtip.style.color="#00ac20";}
+            },
+            rules:"必填，长度为6-16个字符",
+            success:"密码可用",
+            fail:"密码不能为空"
+        };
+        var mail={
+            id:"mail1",
+            label:"邮箱",
+            type:"input",
+            validator:function(){
+                var mail=document.getElementById(senddate.id).value;
+                var mailtip=document.getElementById(senddate.id+"tip");
+                var rex=/^[\w]+@([a-z0-9]+\.)+[a-z0-9]{2,4}$/i;
+                if(rex.test(mail)==true){
+                    mailtip.innerText="邮箱正确";
+                    mailtip.style.borderColor="#00ac20";
+                    mailtip.style.color="#00ac20";}
+                else{
+                    mailtip.innerText="邮箱输入有误";
+                    mailtip.style.borderColor="red";
+                    mailtip.style.color="red";
+                }
+            },
+            rules:"必填，长度为8-16个字符",
+            success:"格式正确",
+            fail:"邮箱不能为空"
+        };
+        var phone={
+            id:"phone1",
+            label:"手机",
+            type:"input",
+            validator:function(){
+                var phone=document.getElementById(senddate.id).value.trim();
+                var ptip=document.getElementById(senddate.id+"tip");
+                if(phone.match(/^(0|86|17951)?(13[0-9]|15[012356789]|17[678]|18[0-9]|14[57])[0-9]{8}$/)){
+                    ptip.innerText="号码正确";
+                    ptip.style.borderColor="#00ac20";
+                    ptip.style.color="#00ac20";
+                }
+                else {
+                    ptip.innerText="手机号码输入有误";
+                    ptip.style.borderColor="red";
+                    ptip.style.color="red";
+                }},
+            rules:"必填，长度为11个字符",
+            success:"格式正确",
+            fail:"手机不能为空"
+        };
+        //绑定表单验证事件
+        function bind(data){
+            document.getElementById(data.id).addEventListener("focus",function(){
+                document.getElementById(data.id+"tip").innerHTML=data.rules;
+                senddate=data;
+                document.getElementById(data.id).addEventListener("blur",data.validator);
+            });
+        }
+        //创建表单函数
+        function createForm(data){
+            var container=document.getElementById("container");
+            var contain=document.createElement("div");
+            var style=document.getElementById("style1");
+            if(style.checked){contain.setAttribute("class","s1");}
+            else {contain.setAttribute("class","s2");}
+            var node=document.createElement("label");
+            node.innerHTML=data.label;
+            node.setAttribute("for",data.id);
+            contain.appendChild(node);
+            node=document.createElement("input");
+            node.setAttribute("type",data.type);
+            node.setAttribute("id",data.id);
+            contain.appendChild(node);
+            node=document.createElement("span");
+            node.setAttribute("id",data.id+"tip");
+            if(style.checked){node.setAttribute("class","s1span");}
+            else {node.setAttribute("class","s2span");}
+            contain.appendChild(node);
+            node=document.createElement("br");
+            contain.appendChild(node);
+            container.appendChild(contain);
+            //绑定触发函数事件
+            bind(data);
+        }
+        //检测选择器，启动生成表单
+        function createAll(){
+            var container=document.getElementById("container");
+            container.innerHTML="";
+            var selector=document.getElementsByName("select");
+            var nowid;
+            for(var i=0;i<selector.length;i++){
+                if(selector[i].checked){
+                    nowid=selector[i].getAttribute("id");
+                    switch (nowid){
+                        case "name":createForm(named);break;
+                        case "pass":createForm(pass);break;
+                        case "mail":createForm(mail);break;
+                        case "phone":createForm(phone);break;
+                    }
+                }
+            }
+        }
+    </script>
+</body>
+</html>
